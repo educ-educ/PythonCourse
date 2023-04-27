@@ -1,0 +1,8 @@
+e = 1
+a, b = map(int, input().split())
+s =" fdfdfd"
+for i in range(10):
+    e += 1
+c = b * 1
+b = 7834
+print(min(a, c))
