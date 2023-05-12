@@ -4,7 +4,6 @@ from flask import Flask, jsonify, request
 from flask_restful import Api, Resource, reqparse
 
 
-
 app = Flask(__name__)
 api = Api()
 client = app.test_client()
@@ -25,13 +24,13 @@ def get_test_json_file():
     f.close()
     return jsonify(s)
 
+
 @app.route('/api/allproblems', methods=['GET'])
 def get_all_problem():
     return jsonify(problems)
 
 @app.route('/api/problems/<problem_id>', methods=['GET'])
 def get_problem(problem_id):
-    #print(problems[int(problem_id)])
     return jsonify(problems[int(problem_id)])
 
 @app.route("/api/tests/<problem_id>/<test_id>", methods=['GET'])
@@ -50,15 +49,11 @@ def get_answer(problem_id, test_id):
 
 @app.route("/api/check/<problem_id>/<user_id>", methods=['POST'])
 def check_solution(problem_id, user_id):
-    #solution = request.json
     solution = str(request.get_data(as_text=True))
-    print(solution + "\n")
     f = open("reader/" + user_id + ".txt", "w")
     f.write(solution)
     f.close()
 
-
-    # os.system("user_id.py")
     try:
         solution_code = open("reader/" + user_id + ".txt", "r").readlines()
     except:
@@ -123,9 +118,6 @@ def check_solution(problem_id, user_id):
             sys.stdin = saved_in
             sys.stdout = saved_out
             output_stream.seek(0)
-            # os.chdir("..")
-            # os.chdir("..")
-            # print("WRONG")
             print("WA")
             return jsonify("WA")
 
@@ -133,18 +125,10 @@ def check_solution(problem_id, user_id):
         sys.stdout = saved_out
         output_stream.seek(0)
         result = "".join(output_stream.read())
-        print("test ", test_n + 1)
-        print("correct:", correct_answer)
-        print("answer:", result)
         if correct_answer != result:
             print("WA")
-            # os.chdir("..")
-            # os.chdir("..")
             return jsonify("WA")
-            # break
     else:
-        # os.chdir("..")
-        # os.chdir("..")
         print("OK")
         return jsonify("OK")
 
