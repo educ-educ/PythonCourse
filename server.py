@@ -17,12 +17,12 @@ parser = reqparse.RequestParser()
 parser.add_argument("name", type=str)
 parser.add_argument("videos", type=int)
 
-@app.route('/api/testcode', methods=['GET'])
-def get_test_json_file():
-    f = open("11.txt", 'r')
-    s = f.readlines()
-    f.close()
-    return jsonify(s)
+# @app.route('/api/testcode', methods=['GET'])
+# def get_test_json_file():
+#     f = open("11.txt", 'r')
+#     s = f.readlines()
+#     f.close()
+#     return jsonify(s)
 
 
 @app.route('/api/allproblems', methods=['GET'])
